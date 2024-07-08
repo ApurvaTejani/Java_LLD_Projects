@@ -3,24 +3,62 @@ package Models;
 import java.util.ArrayList;
 import java.util.List;
 import Exception.InvalidGameConstructorParameterException;
+import Strategy.GameWinningStrategy;
+import Strategy.OrderOneGameWinningStrategy;
 
 public class Game {
     private Board board;
     private List<Player> players;
     private List<Move> moves; // needed for undo
     private GameStatus gamestatus;
-    private int nextPlayerIndex;
+    private int currentPlayerIndex;
     private GameWinningStrategy gws;
+
+    public void setGws(GameWinningStrategy gws) {
+        this.gws = gws;
+    }
+
     private Player winner;
     public void undo(){
+        Move undoMove= moves.get(moves.size()-1);
+        int row=undoMove.getCell().getRow();
+        int col=undoMove.getCell().getCol();
 
+        board.getBoard().get(row).get(col).setCellState(CellState.EMPTY);
+        board.getBoard().get(row).get(col).setPlayer(null);
+        moves.remove(moves.size()-1);
+        currentPlayerIndex=currentPlayerIndex-1;
+        currentPlayerIndex =currentPlayerIndex%players.size();
     }
     private Game(){
 
 
     }
-    public void makeNextMove(){
+    public void makeNextMove()  {
+        Player currentPlayer = players.get(currentPlayerIndex);
+        System.out.println(players.get(currentPlayerIndex).getName()+" 's Turn to play");
+        Move move = null;
+        try {
+            move = currentPlayer.decideMove(board);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        int row=move.getCell().getRow();
+        int col=move.getCell().getCol();
+        System.out.println("Move happened at: "+row+" ,"+col);
+        board.getBoard().get(row).get(col).setCellState(CellState.FILLED);
+        board.getBoard().get(row).get(col).setPlayer(currentPlayer);
 
+        Move finalMove=new Move(currentPlayer,board.getBoard().get(row).get(col));
+        moves.add(finalMove);
+
+        if(gws.checkWinner(board,currentPlayer,finalMove.getCell()))
+        {
+            gamestatus=GameStatus.WIN;
+            winner=currentPlayer;
+        }
+        currentPlayerIndex=currentPlayerIndex+1;
+        currentPlayerIndex =currentPlayerIndex%players.size();
     }
 
     public void setBoard(Board board) {
@@ -35,8 +73,8 @@ public class Game {
         this.moves = moves;
     }
 
-    public void setNextPlayerIndex(int nextPlayerIndex) {
-        this.nextPlayerIndex = nextPlayerIndex;
+    public void setCurrentPlayerIndex(int currentPlayerIndex) {
+        this.currentPlayerIndex = currentPlayerIndex;
     }
 
     public static Builder getBuilder(){
@@ -49,6 +87,10 @@ public class Game {
 
     public void displayBoard() {
         this.board.display();
+    }
+
+    public GameStatus getGamestatus() {
+        return gamestatus;
     }
 
     public static class Builder {
@@ -75,7 +117,8 @@ public class Game {
                     g.setPlayers(players);
                     g.setMoves(new ArrayList<>());
                     g.setBoard(new Board(dimensions));
-                    g.setNextPlayerIndex(0);
+                    g.setCurrentPlayerIndex(0);
+                    g.setGws(new OrderOneGameWinningStrategy(dimensions));
                     return g;
                 }
 

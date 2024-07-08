@@ -23,7 +23,7 @@ public class Board {
                 if(board.get(i).get(j).getCellState().equals(CellState.EMPTY))
                     System.out.print("[ ]");
                 else
-                    System.out.println("[ "+board.get(i).get(j).getPlayer().getSymbol()+" ]");
+                    System.out.print("[ "+board.get(i).get(j).getPlayer().getSymbol()+" ]");
             }
             System.out.println();
         }
@@ -35,5 +35,9 @@ public class Board {
 
     public void setBoard(List<List<Cell>> board) {
         this.board = board;
+    }
+
+    public int getDimensions() {
+        return dimensions;
     }
 }

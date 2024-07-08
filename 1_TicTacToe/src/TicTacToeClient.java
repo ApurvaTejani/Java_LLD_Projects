@@ -37,7 +37,28 @@ public class TicTacToeClient {
         }
         GameController gc = new GameController();
         Game g= gc.createGame(dimension,players);
-        gc.displayBoard(g);
+        int count=0;
+        while(gc.getGameStatus(g).equals(GameStatus.IN_PROGRESS))
+        {
+            System.out.println("This is the current board below");
+            gc.displayBoard(g);
+            String isUndo="";
+            if(count!=0) {
+                System.out.println("Do you want to do undo? y/n");
+                 isUndo = sc.next();
+            }
+
+            if(isUndo.equalsIgnoreCase("y")){
+                gc.undo(g);
+                count=0;
+            }
+            else {
+                gc.executeNextMove(g);
+                count=1;
+            }
+
+        }
+
 
     }
 }

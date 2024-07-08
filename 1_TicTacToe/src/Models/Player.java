@@ -1,5 +1,8 @@
 package Models;
 
+import java.util.Scanner;
+import Exception.IllegalIndexPassedByUser;
+
 public class Player {
     private char symbol;
     private String name;
@@ -9,6 +12,21 @@ public class Player {
         this.symbol = symbol;
         this.name = name;
         this.type = type;
+    }
+
+    public Move decideMove(Board b) throws IllegalIndexPassedByUser {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the row number of the move where you want to play ");
+        int row=sc.nextInt();
+        System.out.println("Enter the col number of the move where you want to play ");
+        int col=sc.nextInt();
+
+        if(row >=b.getDimensions() || col>=b.getDimensions()) {
+            throw new IllegalIndexPassedByUser("You should have entered row or column that is below " + b.getDimensions());
+        }
+        return new Move(this,new Cell(row,col));
+
+
     }
 
     public char getSymbol() {

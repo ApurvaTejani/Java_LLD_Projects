@@ -1,6 +1,7 @@
 package Controller;
 
 import Models.Game;
+import Models.GameStatus;
 import Models.Player;
 
 import java.util.List;
@@ -25,5 +26,15 @@ public class GameController {
     }
 
 
+    public GameStatus getGameStatus(Game g) {
+        return  g.getGamestatus();
+    }
 
+    public void undo(Game g) {
+        g.undo();
+    }
+
+    public void executeNextMove(Game g) {
+        g.makeNextMove();
+    }
 }
