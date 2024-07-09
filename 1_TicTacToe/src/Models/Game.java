@@ -67,6 +67,8 @@ public class Game {
         {
             gamestatus=GameStatus.WIN;
             winner=currentPlayer;
+            System.out.println(winner.getName()+" is the winner -> "+winner.getSymbol());
+            System.out.println("Game is ending now. <<Congratulations>>");
         }
         reservedPositionForUndo=currentPlayerIndex;
         currentPlayerIndex=currentPlayerIndex+1;
