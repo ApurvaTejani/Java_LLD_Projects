@@ -14,6 +14,7 @@ public class Game {
     private GameStatus gamestatus;
     private int currentPlayerIndex;
     private GameWinningStrategy gws;
+    int reservedPositionForUndo;
 
     public void setGws(GameWinningStrategy gws) {
         this.gws = gws;
@@ -28,8 +29,7 @@ public class Game {
         board.getBoard().get(row).get(col).setCellState(CellState.EMPTY);
         board.getBoard().get(row).get(col).setPlayer(null);
         moves.remove(moves.size()-1);
-        currentPlayerIndex=currentPlayerIndex+1;
-        currentPlayerIndex =currentPlayerIndex%players.size();
+        currentPlayerIndex=reservedPositionForUndo;
     }
     private Game(){
 
@@ -68,6 +68,7 @@ public class Game {
             gamestatus=GameStatus.WIN;
             winner=currentPlayer;
         }
+        reservedPositionForUndo=currentPlayerIndex;
         currentPlayerIndex=currentPlayerIndex+1;
         currentPlayerIndex =currentPlayerIndex%players.size();
     }
