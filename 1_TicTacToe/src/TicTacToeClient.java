@@ -44,15 +44,16 @@ public class TicTacToeClient {
             gc.displayBoard(g);
             String isUndo="";
             if(count!=0) {
-                System.out.println("Do you want to do undo? y/n");
+                System.out.println("Do you want to do undo? y/n or want to see reply (history) of moves?");
                  isUndo = sc.next();
             }
 
             if(isUndo.equalsIgnoreCase("y")){
                 gc.undo(g);
                 count=0;
-            }
-            else {
+            } else if (isUndo.equalsIgnoreCase("history")) {
+                gc.replayMoves(g);
+            } else {
                 gc.executeNextMove(g);
                 count=1;
             }
