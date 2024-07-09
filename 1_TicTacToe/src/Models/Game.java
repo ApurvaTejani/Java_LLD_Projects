@@ -107,6 +107,14 @@ public class Game {
         return gamestatus;
     }
 
+    public void replayMoves() {
+        for (Move m:
+             moves) {
+            System.out.print("("+m.getCell().getRow()+", "+m.getCell().getCol()+") ");
+        }
+        System.out.println(" were the past moves.");
+    }
+
     public static class Builder {
     private  int dimensions;
     private List<Player> players;

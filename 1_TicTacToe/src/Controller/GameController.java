@@ -37,4 +37,8 @@ public class GameController {
     public void executeNextMove(Game g) {
         g.makeNextMove();
     }
+
+    public void replayMoves(Game g) {
+        g.replayMoves();
+    }
 }
