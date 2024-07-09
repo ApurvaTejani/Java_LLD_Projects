@@ -5,6 +5,7 @@ import java.util.List;
 import Exception.InvalidGameConstructorParameterException;
 import Strategy.GameWinningStrategy;
 import Strategy.OrderOneGameWinningStrategy;
+import Exception.CellAlreadyFilledException;
 
 public class Game {
     private Board board;
@@ -27,14 +28,14 @@ public class Game {
         board.getBoard().get(row).get(col).setCellState(CellState.EMPTY);
         board.getBoard().get(row).get(col).setPlayer(null);
         moves.remove(moves.size()-1);
-        currentPlayerIndex=currentPlayerIndex-1;
+        currentPlayerIndex=currentPlayerIndex+1;
         currentPlayerIndex =currentPlayerIndex%players.size();
     }
     private Game(){
 
 
     }
-    public void makeNextMove()  {
+    public void makeNextMove() {
         Player currentPlayer = players.get(currentPlayerIndex);
         System.out.println(players.get(currentPlayerIndex).getName()+" 's Turn to play");
         Move move = null;
@@ -45,6 +46,16 @@ public class Game {
         }
         int row=move.getCell().getRow();
         int col=move.getCell().getCol();
+        CellState validateCell=board.getBoard().get(row).get(col).getCellState();
+        try {
+            if (validateCell.equals(CellState.FILLED)) {
+                throw new CellAlreadyFilledException("This placed is already filled by " + players.get((currentPlayerIndex+1)%players.size()).getName());
+
+            }
+        }
+        catch (Exception e){
+            throw new RuntimeException(e);
+        }
         System.out.println("Move happened at: "+row+" ,"+col);
         board.getBoard().get(row).get(col).setCellState(CellState.FILLED);
         board.getBoard().get(row).get(col).setPlayer(currentPlayer);
