@@ -75,9 +75,26 @@ public class Game {
             System.out.println(winner.getName()+" is the winner -> "+winner.getSymbol());
             System.out.println("Game is ending now. <<Congratulations>>");
         }
+        if(checkDraw()){
+            System.out.println("Game has been Draw .  Ending now");
+        }
         reservedPositionForUndo=currentPlayerIndex;
         currentPlayerIndex=currentPlayerIndex+1;
         currentPlayerIndex =currentPlayerIndex%players.size();
+    }
+
+    public boolean checkDraw(){
+        if(moves.size()== board.getDimensions()* board.getDimensions()) {
+            List<String> names = new ArrayList<>();
+            for (Player p :
+                    players) {
+                names.add(p.getName());
+            }
+            gamestatus=GameStatus.DRAW;
+            System.out.println("Players "+names+" have been tied in this match");
+            return true;
+        }
+        return false;
     }
 
     public void setBoard(Board board) {
