@@ -24,7 +24,7 @@ public class TicTacToeClient {
             System.out.println("Enter the Difficultity Level- Easy,Medium or Hard");
             String bdlString= sc.next();
             BotDifficuiltyLevel bdl=(bdlString.equalsIgnoreCase("easy")?BotDifficuiltyLevel.EASY:BotDifficuiltyLevel.MEDIUM);
-            players.add(new Bot(symbol,name, PlayerType.BOT,bdl));
+            players.add(new Bot(symbol,name, PlayerType.BOT));
 
         }
 
@@ -44,8 +44,10 @@ public class TicTacToeClient {
             gc.displayBoard(g);
             String isUndo="";
             if(count!=0) {
-                System.out.println("Do you want to do undo? y/n or want to see reply (history) of moves?");
-                 isUndo = sc.next();
+                if(g.getMoves().get(g.getMoves().size()-1).getPlayer().getType().equals(PlayerType.HUMAN)) {
+                    System.out.println("Do you want to do undo? y/n or want to see reply (history) of moves?");
+                    isUndo = sc.next();
+                }
             }
 
             if(isUndo.equalsIgnoreCase("y")){

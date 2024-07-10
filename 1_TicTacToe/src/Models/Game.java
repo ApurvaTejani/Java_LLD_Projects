@@ -13,6 +13,11 @@ public class Game {
     private List<Move> moves; // needed for undo
     private GameStatus gamestatus;
     private int currentPlayerIndex;
+
+    public List<Move> getMoves() {
+        return moves;
+    }
+
     private GameWinningStrategy gws;
     int reservedPositionForUndo;
 
