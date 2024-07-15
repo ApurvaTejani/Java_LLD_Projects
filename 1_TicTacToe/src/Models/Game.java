@@ -73,6 +73,7 @@ public class Game {
             gamestatus=GameStatus.WIN;
             winner=currentPlayer;
             System.out.println(winner.getName()+" is the winner -> "+winner.getSymbol());
+            board.display();
             System.out.println("Game is ending now. <<Congratulations>>");
         }
         if(checkDraw()){
@@ -154,8 +155,9 @@ public class Game {
         }
 
 
-        public Game build() throws InvalidGameConstructorParameterException {
-                if(validate()) {
+        public Game build()  {
+            try {
+                if (validate()) {
                     Game g = new Game();
                     g.setGamestatus(GameStatus.IN_PROGRESS);
                     g.setPlayers(players);
@@ -165,20 +167,32 @@ public class Game {
                     g.setGws(new OrderOneGameWinningStrategy(dimensions));
                     return g;
                 }
+            }
+            catch (InvalidGameConstructorParameterException e){
+                System.out.println(e);
 
-                return null;
-
-
-
+            }
+            return null;
         }
         public boolean validate() throws InvalidGameConstructorParameterException {
             if(dimensions<3)
                 throw new InvalidGameConstructorParameterException("Dimensions should be greater or equal to 3");
             if(this.dimensions-1!=this.players.size())
                 throw new InvalidGameConstructorParameterException("There is some mismatch");
-
-
+            for (Player p:
+                 players) {
+                if(Character.isDigit(p.getSymbol()))
+                    throw new InvalidGameConstructorParameterException("Symbol cannot be digits");
+                else if (p.getName().length()==0) {
+                    throw new InvalidGameConstructorParameterException("Name cant be empty");
+                }
+                else if(Character.toString(p.getSymbol()).length()!=1){
+                    throw new InvalidGameConstructorParameterException("Symbol should be of 1 Letter only");
+                    }
+                }
             return true;
+            }
+
+
         }
     }
-}

@@ -37,6 +37,11 @@ public class TicTacToeClient {
         }
         GameController gc = new GameController();
         Game g= gc.createGame(dimension,players);
+        if(g==null){
+            System.out.println("==Validation Failed=====");
+            System.out.println("Exiting Game ......");
+            return;
+        }
         int count=0;
         while(gc.getGameStatus(g).equals(GameStatus.IN_PROGRESS))
         {
