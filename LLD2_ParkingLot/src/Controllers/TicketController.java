@@ -15,6 +15,7 @@ public class TicketController {
         GeneratedTicketResponseDTO responseDTO = new GeneratedTicketResponseDTO();
         try{
             Ticket ticket = ticketService.generateTicket(requestObjectDTO.getGateId(),requestObjectDTO.getVehicleNumber(),requestObjectDTO.getVehicleType());
+            responseDTO.setTicketId(ticket.getId());
             responseDTO.setResponseStatus(ResponseStatus.SUCCESS);
         }
         catch (Exception e){
