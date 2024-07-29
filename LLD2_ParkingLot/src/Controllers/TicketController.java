@@ -20,7 +20,7 @@ public class TicketController {
         }
         catch (Exception e){
             responseDTO.setResponseStatus(ResponseStatus.FAILURE);
-            responseDTO.setMessage("Failure occurred");
+            responseDTO.setMessage(e.getMessage());
         }
         return responseDTO;
     }

@@ -7,6 +7,14 @@ public class GeneratedTicketResponseDTO {
     private ResponseStatus responseStatus;
     private String message;
 
+    public ResponseStatus getResponseStatus() {
+        return responseStatus;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
     public void setResponseStatus(ResponseStatus responseStatus) {
         this.responseStatus = responseStatus;
     }
