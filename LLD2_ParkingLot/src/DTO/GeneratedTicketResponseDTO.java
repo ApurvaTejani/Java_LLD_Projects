@@ -7,29 +7,6 @@ public class GeneratedTicketResponseDTO {
     private ResponseStatus responseStatus;
     private String message;
 
-    public ResponseStatus getResponseStatus() {
-        return responseStatus;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setResponseStatus(ResponseStatus responseStatus) {
-        this.responseStatus = responseStatus;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public Long getTicketId() {
-        return ticketId;
-    }
-
-    public void setTicketId(Long ticketId) {
-        this.ticketId = ticketId;
-    }
 
 
 }

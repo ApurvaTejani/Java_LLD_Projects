@@ -3,12 +3,24 @@ package Models;
 import java.util.Date;
 
 public class Ticket extends BaseClass {
+
+
+
+    private String number;
     private Date entryTime;
     private ParkingSlot assignedParkingSpot;
     private Gate entryGate;
     private Vehicle vehicle;
-    private Operator op;
+    private Operator generatedBy;
 
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
     public Date getEntryTime() {
         return entryTime;
     }
@@ -42,10 +54,10 @@ public class Ticket extends BaseClass {
     }
 
     public Operator getOp() {
-        return op;
+        return generatedBy;
     }
 
     public void setOp(Operator op) {
-        this.op = op;
+        this.generatedBy = op;
     }
 }

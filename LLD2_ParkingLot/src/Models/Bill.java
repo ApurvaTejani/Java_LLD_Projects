@@ -7,7 +7,7 @@ public class Bill extends BaseClass{
     private Ticket ticket;
     private Date exitTime;
     private int amount;
-    List<Payment> paymentList;
+    private List<Payment> paymentList;
     private Gate exitGate;
     private Operator op;
     private String invoiceNumber;

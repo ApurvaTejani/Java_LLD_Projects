@@ -1,6 +1,7 @@
 package Models.enums;
 
 public enum PaymentMode {
-    ONLINE,
+    CRED_CARD,
+    DEBIT_CARD,
     CASH
 }
