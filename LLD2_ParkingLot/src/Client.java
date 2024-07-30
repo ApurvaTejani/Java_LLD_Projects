@@ -6,6 +6,7 @@ import Models.Gate;
 import Models.ParkingFloor;
 import Models.ParkingLot;
 import Models.ParkingSlot;
+import Models.enums.ParkingSpotStatus;
 import Models.enums.VehicleType;
 import Repositories.GateRepository;
 import Repositories.ParkingLotRepository;
@@ -57,8 +58,19 @@ public class Client {
         for (int i = 0; i <noOfGates ; i++) {
             gr.save(gateList.get(i));
         }
-
+        int i=0;
+        for(ParkingFloor floor:pl.getParkingFloors()){
+            for (ParkingSlot slot:floor.getParkingSlotList()) {
+                slot.setCurrentParkingStatus(ParkingSpotStatus.AVAILABLE);
+                slot.setSupportedvehicleType(VehicleType.SMALL);
+                slot.setNumber("A -"+(i+100));
+                slot.setId(i+100);
+                i++;
+            }
+        }
     ParkingLotRepository plr= new ParkingLotRepository();
+        plr.save(pl);
+
     TicketRepository tr= new TicketRepository();
     VehicleRepository vr = new VehicleRepository();
     ParkingSlotAssignmentStrategy random= new RandomParkingSlotAssignStrategy();
@@ -69,7 +81,9 @@ public class Client {
     dto.setVehicleType(VehicleType.SMALL);
     dto.setOwnerName("Apurva");
     dto.setVehicleNumber("MH47AR7546");
-    tc.generateTicket(dto);
+    GeneratedTicketResponseDTO responseDTO=tc.generateTicket(dto);
+    System.out.println(responseDTO.toString());
+
 
     }
 

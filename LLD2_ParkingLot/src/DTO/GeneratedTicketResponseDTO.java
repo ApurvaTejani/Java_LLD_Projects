@@ -7,6 +7,15 @@ private Ticket ticket;
 private ResponseStatus responseStatus;
 private String message;
 
+    @Override
+    public String toString() {
+        return "GeneratedTicketResponseDTO{" +
+                "ticket=" + ticket +
+                ", responseStatus=" + responseStatus +
+                ", message='" + message + '\'' +
+                '}';
+    }
+
     public Ticket getTicket() {
         return ticket;
     }
