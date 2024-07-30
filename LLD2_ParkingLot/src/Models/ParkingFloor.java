@@ -7,7 +7,7 @@ import java.util.List;
 
 public class ParkingFloor extends BaseClass {
     private String number;
-    private List<ParkingLot> parkingLotsList;
+    private List<ParkingSlot> parkingSlotList;
     private List<VehicleType> vehicleTypeList;
     private FloorStatus floorStatus;
 
@@ -19,12 +19,12 @@ public class ParkingFloor extends BaseClass {
         this.number = number;
     }
 
-    public List<ParkingLot> getParkingLotsList() {
-        return parkingLotsList;
+    public List<ParkingSlot> getParkingSlotList() {
+        return parkingSlotList;
     }
 
-    public void setParkingLotsList(List<ParkingLot> parkingLotsList) {
-        this.parkingLotsList = parkingLotsList;
+    public void setParkingSlotList(List<ParkingSlot> parkingSlotList) {
+        this.parkingSlotList = parkingSlotList;
     }
 
     public List<VehicleType> getVehicleTypeList() {
