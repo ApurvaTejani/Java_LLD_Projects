@@ -2,16 +2,17 @@ import Controllers.TicketController;
 import DTO.GenerateTicketRequestDTO;
 import DTO.GeneratedTicketResponseDTO;
 import DTO.ResponseStatus;
-import Models.Gate;
-import Models.ParkingFloor;
-import Models.ParkingLot;
-import Models.ParkingSlot;
+import Models.*;
+import Models.enums.GateStatus;
+import Models.enums.GateType;
 import Models.enums.ParkingSpotStatus;
 import Models.enums.VehicleType;
 import Repositories.GateRepository;
 import Repositories.ParkingLotRepository;
 import Repositories.TicketRepository;
 import Repositories.VehicleRepository;
+import manager.GateManager;
+import manager.OperatorManager;
 import service.GateService;
 import service.TicketService;
 import service.VehicleService;
@@ -32,6 +33,16 @@ public class Client {
         int parkingSlots=sc.nextInt();
         System.out.println("Enter number of Entry Gates");
         int noOfGates= sc.nextInt();
+
+        // Operator initialization
+        OperatorManager om = new OperatorManager();
+        List<Operator> operatorList = om.initializeOperators(noOfGates, sc);
+
+        // Gate initialization and Gate DB Save
+        GateManager gm = new GateManager();
+        GateRepository gr = new GateRepository();
+        List<Gate> gateList=gm.initializeGates(noOfGates,operatorList,gr);
+
         ParkingLot pl = new ParkingLot();
         List<ParkingFloor> parkingFloorList= new ArrayList<>();
         for (int i = 0; i <parkingFloors ; i++) {
@@ -45,19 +56,10 @@ public class Client {
         for (int i = 0; i < parkingFloors ; i++) {
             parkingFloorList.get(i).setParkingSlotList(parkingSlotList);
         }
-        List<Gate> gateList= new ArrayList<>();
-        for (int i = 0; i < noOfGates ; i++) {
-            gateList.add(new Gate());
-        }
-
         pl.setGates(gateList);
 
 
 
-    GateRepository gr = new GateRepository();
-        for (int i = 0; i <noOfGates ; i++) {
-            gr.save(gateList.get(i));
-        }
         int i=0;
         for(ParkingFloor floor:pl.getParkingFloors()){
             for (ParkingSlot slot:floor.getParkingSlotList()) {
