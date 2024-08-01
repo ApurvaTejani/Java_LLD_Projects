@@ -30,15 +30,11 @@ public class Client {
         GateRepository gr = new GateRepository();
         List<Gate> gateList=gm.initializeGates(ui.getNoOfGates(),operatorList,gr);
 
-        // Parking Slot initialization
-        ParkingSlotManager psm= new ParkingSlotManager();
-        List<ParkingSlot> parkingSlotList=psm.initializeParkingSlots(ui.getNoOfParkingSlots());
-
         // Parking Floor initialization
         ParkingFloorManager pfm= new ParkingFloorManager();
-        List<ParkingFloor> parkingFloorList=pfm.initializeParkingFloors(ui.getNoOfParkingFloors(),parkingSlotList);
+        List<ParkingFloor> parkingFloorList=pfm.initializeParkingFloors(ui.getNoOfParkingFloors(),ui.getNoOfParkingSlots());
 
-        // Parking Floor initialization and save to ParkingLot DB
+        // Parking Lot initialization and save to ParkingLot DB
         ParkingLotManager plm = new ParkingLotManager();
         ParkingLotRepository plr= new ParkingLotRepository();
         ParkingLot pl = plm.initializeParkingLot(gateList,parkingFloorList,ui.getNoOfParkingSlots(),plr);
