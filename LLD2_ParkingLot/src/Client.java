@@ -38,9 +38,9 @@ public class Client {
         ParkingLotManager plm = new ParkingLotManager();
         ParkingLotRepository plr= new ParkingLotRepository();
         ParkingLot pl = plm.initializeParkingLot(gateList,parkingFloorList,ui.getNoOfParkingSlots(),plr);
-
+        System.out.println("=".repeat(100));
         System.out.println("Your Parking Lot Setup is Completed....Thanks for info We have updated in our database");
-
+        System.out.println("=".repeat(100));
         // Get Response of Ticket
         TicketManager tm = new TicketManager();
         GeneratedTicketResponseDTO dto=tm.initializeTicket(gr,plr,sc);
