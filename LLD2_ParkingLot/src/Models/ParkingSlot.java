@@ -8,6 +8,16 @@ public class ParkingSlot extends BaseClass{
     private ParkingSpotStatus currentParkingStatus;
     private VehicleType supportedvehicleType;
 
+    private ParkingFloor parkingFloor;
+
+    public ParkingFloor getParkingFloor() {
+        return parkingFloor;
+    }
+
+    public void setParkingFloor(ParkingFloor parkingFloor) {
+        this.parkingFloor = parkingFloor;
+    }
+
     public String getNumber() {
         return number;
     }

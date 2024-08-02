@@ -60,6 +60,7 @@ public class TicketService {
             ParkingLot parkingLot= plr.findParkingLotByGateId(gate);
             ParkingSlot parkingSlot=psas.assignParkingSlot(parkingLot,vehicleType);
             ticket.setAssignedParkingSpot(parkingSlot);
+
             ticket.setNumber("TICKET NO "+ticket.getId());
             parkingSlot.setCurrentParkingStatus(ParkingSpotStatus.OCCUPIED);
             Ticket savedTicket = tr.save(ticket);

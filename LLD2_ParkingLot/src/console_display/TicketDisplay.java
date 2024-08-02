@@ -13,7 +13,8 @@ public class TicketDisplay {
         System.out.println("Ticket Generated at: "+ticket.getEntryTime());
         System.out.println("Entry Gate Number: "+ticket.getEntryGate().getGateNumber());
         System.out.println("Ticket Given by: "+ticket.getOp().getName());
-        System.out.println("Assigned Slot: "+ticket.getAssignedParkingSpot().getNumber());
+        System.out.println("Floor No: "+ticket.getAssignedParkingSpot().getParkingFloor().getNumber());
+        System.out.println("Assigned Slot No: "+ticket.getAssignedParkingSpot().getNumber());
         System.out.println(("--").repeat(50));
     }
 }
