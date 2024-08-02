@@ -17,8 +17,10 @@ public class RandomParkingSlotAssignStrategy implements ParkingSlotAssignmentStr
     public ParkingSlot assignParkingSlot(ParkingLot parkingLot, VehicleType vehicleType) {
         for (ParkingFloor floor:parkingLot.getParkingFloors()){
             for (ParkingSlot slot:floor.getParkingSlotList()){
-                if(slot.getSupportedvehicleType().equals(vehicleType) && slot.getCurrentParkingStatus().equals(ParkingSpotStatus.AVAILABLE))
+                if(slot.getSupportedvehicleType().equals(vehicleType) && slot.getCurrentParkingStatus().equals(ParkingSpotStatus.AVAILABLE)) {
+                    slot.setParkingFloor(floor);
                     return slot;
+                }
             }
         }
         return null;
