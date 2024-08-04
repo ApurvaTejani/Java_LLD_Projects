@@ -21,7 +21,6 @@ public class TicketController {
            Ticket ticket= ts.generateTicket(requestObject.getGateId(), requestObject.getVehicleType(), requestObject.getVehicleNumber(), requestObject.getOwnerName());
             responseDTO.setResponseStatus(ResponseStatus.SUCCESS);
             responseDTO.setTicket(ticket);
-            responseDTO.setMessage("Ticket Generated Successfully : "+ticket.getNumber()+" with id "+ticket.getId()+" at time "+ticket.getEntryTime()+" by operator "+ticket.getOp()+" slot assigned "+ticket.getAssignedParkingSpot()+" with vehicle details "+ticket.getVehicle().getVehicleNumber()+" "+ticket.getVehicle().getOwnerName()+" "+ticket.getVehicle().getVehicleType()+" "+ticket.getEntryGate()+" Gate.");
         }
         catch (Exception ex){
             responseDTO.setResponseStatus(ResponseStatus.FAILURE);

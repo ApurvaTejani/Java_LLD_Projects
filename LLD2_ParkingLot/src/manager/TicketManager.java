@@ -3,6 +3,7 @@ package manager;
 import Controllers.TicketController;
 import DTO.GenerateTicketRequestDTO;
 import DTO.GeneratedTicketResponseDTO;
+import DTO.ResponseStatus;
 import Models.enums.VehicleType;
 import Repositories.GateRepository;
 import Repositories.ParkingLotRepository;
@@ -16,11 +17,24 @@ import service.strategy.RandomParkingSlotAssignStrategy;
 import java.util.Scanner;
 
 public class TicketManager {
+    private static int countSmall=0;
+    private static int countMedium=0;
+    private static int countHeavy=0;
+
+    public static int getCountSmall() {
+        return countSmall;
+    }
+
+    public static int getCountMedium() {
+        return countMedium;
+    }
+
+    public static int getCountHeavy() {
+        return countHeavy;
+    }
 
     public GeneratedTicketResponseDTO initializeTicket(GateRepository gr, ParkingLotRepository plr, Scanner sc){
-        int countSmall=0;
-        int countMedium=0;
-        int countHeavy=0;
+
 
         TicketRepository tr= new TicketRepository();
         VehicleRepository vr = new VehicleRepository();
@@ -61,12 +75,14 @@ public class TicketManager {
             if(exit.equalsIgnoreCase("yes"))
                 break;
             GeneratedTicketResponseDTO responseDTO=tc.generateTicket(dto);
-            if(responseDTO.getTicket()==null){
+            System.out.println(responseDTO.getMessage());
+            if(responseDTO.getResponseStatus().equals(ResponseStatus.FAILURE)){
                 System.out.println(("--").repeat(50));
-                System.out.println("Sorry.....Slot has been fulled for "+type);
+                System.out.println("Ticket is not Generated Successfully");
                 System.out.println(("--").repeat(50));
                 continue;
             }
+
             td.display(responseDTO);
 
         }

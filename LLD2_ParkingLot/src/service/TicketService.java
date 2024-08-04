@@ -59,15 +59,14 @@ public class TicketService {
             ticket.setVehicle(savedVehicle);
             ParkingLot parkingLot= plr.findParkingLotByGateId(gate);
             Optional<ParkingSlot> parkingSlot=psas.assignParkingSlot(parkingLot,vehicleType);
+             if(parkingSlot.isEmpty()){
+            throw new RuntimeException("No Slot are empty");
+             }
             ticket.setAssignedParkingSpot(parkingSlot.get());
 
             ticket.setNumber("TICKET NO "+ticket.getId());
-            if(parkingSlot.isEmpty()){
-                throw new RuntimeException("No Slot are empty");
-            }
-            else {
-                parkingSlot.get().setCurrentParkingStatus(ParkingSpotStatus.OCCUPIED);
-            }
+
+
             Ticket savedTicket = tr.save(ticket);
             return savedTicket;
 
