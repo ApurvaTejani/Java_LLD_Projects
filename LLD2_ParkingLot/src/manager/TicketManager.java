@@ -18,6 +18,10 @@ import java.util.Scanner;
 public class TicketManager {
 
     public GeneratedTicketResponseDTO initializeTicket(GateRepository gr, ParkingLotRepository plr, Scanner sc){
+        int countSmall=0;
+        int countMedium=0;
+        int countHeavy=0;
+
         TicketRepository tr= new TicketRepository();
         VehicleRepository vr = new VehicleRepository();
         ParkingSlotAssignmentStrategy random= new RandomParkingSlotAssignStrategy();
@@ -40,12 +44,15 @@ public class TicketManager {
             String type= sc.nextLine();
             if(type.equals("Bike") || type.equals("Scooty")){
                 dto.setVehicleType(VehicleType.SMALL);
+                countSmall++;
             }
             else if(type.equals("Car") || type.equals("Rick") || type.equals("Cab")){
                 dto.setVehicleType(VehicleType.MEDIUM);
+                countMedium++;
             }
             else if(type.equals("Truck") || type.equals("Bus")){
                 dto.setVehicleType(VehicleType.HEAVY);
+                countHeavy++;
             }
             System.out.println("Want to exit? ");
             String exit=sc.next();
@@ -54,6 +61,12 @@ public class TicketManager {
             if(exit.equalsIgnoreCase("yes"))
                 break;
             GeneratedTicketResponseDTO responseDTO=tc.generateTicket(dto);
+            if(responseDTO.getTicket()==null){
+                System.out.println(("--").repeat(50));
+                System.out.println("Sorry.....Slot has been fulled for "+type);
+                System.out.println(("--").repeat(50));
+                continue;
+            }
             td.display(responseDTO);
 
         }

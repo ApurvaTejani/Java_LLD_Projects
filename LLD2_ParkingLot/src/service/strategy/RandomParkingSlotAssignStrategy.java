@@ -9,20 +9,21 @@ import Models.enums.VehicleType;
 import Repositories.ParkingLotRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public class RandomParkingSlotAssignStrategy implements ParkingSlotAssignmentStrategy{
 
     private ParkingLotRepository plr;
     @Override
-    public ParkingSlot assignParkingSlot(ParkingLot parkingLot, VehicleType vehicleType) {
+    public Optional<ParkingSlot> assignParkingSlot(ParkingLot parkingLot, VehicleType vehicleType) {
         for (ParkingFloor floor:parkingLot.getParkingFloors()){
             for (ParkingSlot slot:floor.getParkingSlotList()){
                 if(slot.getSupportedvehicleType().equals(vehicleType) && slot.getCurrentParkingStatus().equals(ParkingSpotStatus.AVAILABLE)) {
                     slot.setParkingFloor(floor);
-                    return slot;
+                    return Optional.of(slot);
                 }
             }
         }
-        return null;
+        return Optional.empty();
     }
 }
