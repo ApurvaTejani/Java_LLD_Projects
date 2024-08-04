@@ -33,7 +33,7 @@ public class TicketManager {
         return countHeavy;
     }
 
-    public GeneratedTicketResponseDTO initializeTicket(GateRepository gr, ParkingLotRepository plr, Scanner sc){
+    public GeneratedTicketResponseDTO initializeTicket(GateRepository gr, ParkingLotRepository plr,BillManager bm, Scanner sc){
 
 
         TicketRepository tr= new TicketRepository();
@@ -73,8 +73,10 @@ public class TicketManager {
             String exit=sc.next();
 
 
-            if(exit.equalsIgnoreCase("yes"))
-                break;
+            if(exit.equalsIgnoreCase("yes")){
+                bm.initializeBill(gr,tr,sc);
+            }
+
             GeneratedTicketResponseDTO responseDTO=tc.generateTicket(dto);
             if(responseDTO.getResponseStatus().equals(ResponseStatus.FAILURE)){
                 System.out.println(("--").repeat(50));
@@ -86,7 +88,6 @@ public class TicketManager {
             td.display(responseDTO);
 
         }
-        GeneratedTicketResponseDTO responseDTO=tc.generateTicket(dto);
-        return responseDTO;
+
     }
 }

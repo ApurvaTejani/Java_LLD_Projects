@@ -43,7 +43,11 @@ public class Client {
         System.out.println("=".repeat(100));
         // Get Response of Ticket
         TicketManager tm = new TicketManager();
-        GeneratedTicketResponseDTO dto=tm.initializeTicket(gr,plr,sc);
+        BillManager bm = new BillManager();
+        GeneratedTicketResponseDTO dto=tm.initializeTicket(gr,plr,bm,sc);
+
+        //Get Bill
+
 
 
 

@@ -6,7 +6,7 @@ import java.util.List;
 public class Bill extends BaseClass{
     private Ticket ticket;
     private Date exitTime;
-    private int amount;
+    private Double amount;
     private List<Payment> paymentList;
     private Gate exitGate;
     private Operator op;
@@ -28,11 +28,11 @@ public class Bill extends BaseClass{
         this.exitTime = exitTime;
     }
 
-    public int getAmount() {
+    public Double getAmount() {
         return amount;
     }
 
-    public void setAmount(int amount) {
+    public void setAmount(Double amount) {
         this.amount = amount;
     }
 
