@@ -68,6 +68,7 @@ public class TicketManager {
                 dto.setVehicleType(VehicleType.HEAVY);
                 countHeavy++;
             }
+
             System.out.println("Want to exit? ");
             String exit=sc.next();
 
@@ -75,10 +76,9 @@ public class TicketManager {
             if(exit.equalsIgnoreCase("yes"))
                 break;
             GeneratedTicketResponseDTO responseDTO=tc.generateTicket(dto);
-            System.out.println(responseDTO.getMessage());
             if(responseDTO.getResponseStatus().equals(ResponseStatus.FAILURE)){
                 System.out.println(("--").repeat(50));
-                System.out.println("Ticket is not Generated Successfully");
+                System.out.println("Ticket is not Generated Successfully Reason - "+responseDTO.getMessage());
                 System.out.println(("--").repeat(50));
                 continue;
             }

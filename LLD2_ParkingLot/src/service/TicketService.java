@@ -38,6 +38,9 @@ public class TicketService {
             if(gateOptional.isEmpty()){
                 throw new RuntimeException("Invalid Gate entered");
             }
+            if(vehicleType==null){
+                throw new RuntimeException("Invalid Vehicle Type");
+            }
 
             Gate gate= gateOptional.get();
             ticket.setEntryGate(gate);
@@ -63,6 +66,7 @@ public class TicketService {
             throw new RuntimeException("No Slot are empty");
              }
             ticket.setAssignedParkingSpot(parkingSlot.get());
+             parkingSlot.get().setCurrentParkingStatus(ParkingSpotStatus.OCCUPIED);
 
             ticket.setNumber("TICKET NO "+ticket.getId());
 
