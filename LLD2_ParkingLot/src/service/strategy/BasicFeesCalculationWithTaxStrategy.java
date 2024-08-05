@@ -13,15 +13,21 @@ public class BasicFeesCalculationWithTaxStrategy implements FeesCalculationStrat
         mul= diff/(60*60*1000);
         if(vehicleType.equals(VehicleType.SMALL)){
             baseFare=30.0;
-            baseFare=(int)mul*baseFare;
+            if(mul!=0) {
+                baseFare = mul * baseFare;
+            }
         }
         else if(vehicleType.equals(VehicleType.MEDIUM)){
             baseFare=50.0;
-            baseFare=(int)mul*baseFare*1.50;
+            if(mul!=0) {
+                baseFare = mul * baseFare * 1.50;
+            }
         }
         else if(vehicleType.equals(VehicleType.HEAVY)){
             baseFare=80.0;
-            baseFare=(int)mul*baseFare*1.70;
+            if(mul!=0) {
+                baseFare = mul * baseFare * 1.70;
+            }
         }
         return baseFare;
     }

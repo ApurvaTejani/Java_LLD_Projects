@@ -73,9 +73,7 @@ public class TicketManager {
             String exit=sc.next();
 
 
-            if(exit.equalsIgnoreCase("yes")){
-                bm.initializeBill(gr,tr,sc);
-            }
+
 
             GeneratedTicketResponseDTO responseDTO=tc.generateTicket(dto);
             if(responseDTO.getResponseStatus().equals(ResponseStatus.FAILURE)){
@@ -86,8 +84,9 @@ public class TicketManager {
             }
 
             td.display(responseDTO);
-
+            if(exit.equalsIgnoreCase("yes")){
+                bm.initializeBill(gr,tr,sc);
+            }
         }
-
     }
 }

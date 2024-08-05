@@ -18,6 +18,7 @@ public class BillController {
         BillResponseDTO responseDTO= new BillResponseDTO();
         try{
             Bill bill=bs.generateBill(requestObject.getGateId(), requestObject.getTicketId());
+            responseDTO.setBill(bill);
             responseDTO.setBillStatus(BillResponseStatus.SUCCESS);
         }
         catch (Exception ex){

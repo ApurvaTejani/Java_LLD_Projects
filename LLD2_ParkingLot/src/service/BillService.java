@@ -48,8 +48,8 @@ public class BillService {
         Double amount=fcs.calculateAmount(ticketOptional.get().getEntryTime(),bill.getExitTime(),ticketOptional.get().getVehicle().getVehicleType());
         bill.setAmount(amount);
         Bill saveBill=br.save(bill);
-       int randomNo=(int) Math.random()*100000000;
-       saveBill.setInvoiceNumber(randomNo+"-"+saveBill.getId());
+       long randomNo=(long) (Math.random()*1000000000);
+       saveBill.setInvoiceNumber(randomNo+""+saveBill.getId());
 
 
 
